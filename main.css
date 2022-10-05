@@ -52,17 +52,18 @@ legend {
 }
 
 .stream {
-    background-color: rgba(245, 245, 245, 0.186);
+    background-color: rgba(143, 143, 143, 0.186);
     margin-right: 25vw;
 }
 
 fieldset {
     margin-top: 5vw;
-    background-color: rgba(245, 245, 245, 0.279);
+    background-color: rgba(255, 247, 247, 0.475);
     padding: 1vw;
 }
 
 blockquote, legend, p, details {
+    padding: .2em;
     font-family:monospace
 
 }
@@ -93,8 +94,15 @@ li {
     font-family: monospace;
 }
 
+fieldset:hover {
+    /* font-weight: 700; */
+    /* color: white; */
+    background-color: rgba(219, 219, 219, 0.744);
+    text-shadow: 0 0 rgb(0, 0, 0);
+}
+
 li:hover {
-    background-color: rgba(0, 128, 0, 0.251);
+    background-color: rgba(0, 128, 0, 0.371);
 }
 
 li:focus {
@@ -103,8 +111,21 @@ li:focus {
 
 a:hover {
     background-color: rgba(0, 128, 0, 0.251);
+    box-shadow: 0 0 2em rgba(0, 0, 255, 0.833);
+    border-radius: 1em 1em;
+    color: whitesmoke;
+    font-weight: 1000;
+    text-shadow: 0 0 1em black;
 }
 
+legend, summary:hover{
+    background-color:rgba(245, 245, 245, 0.186);
+    box-shadow: 0 0 2em rgba(0, 0, 255, 0.833);
+    border-radius: 1em 1em;
+    color: whitesmoke;
+    font-weight: 1000;
+    text-shadow: 0 0 1em black;
+}
 
 nav {
     /* font-size: 1vw; */
@@ -143,3 +164,16 @@ header {
     margin-right: 25vw;
 }
 
+#button {
+    padding: 4vh;
+}
+
+#button:hover {
+    background-color:rgba(230, 85, 85, 0.427);
+    color: white;
+    text-shadow: 0 0 pink;
+}
+
+#play,#pause,#stop {
+    font-size: .8vh;
+}

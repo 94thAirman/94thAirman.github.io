@@ -2277,7 +2277,58 @@ header.appendChild(translation)
 
 stream1_ol = document.querySelector("#stream1_ol")
 
+onload = function() {
+    if ('speechSynthesis' in window) {
+        /* speech synthesis supported */
+    }
+    else {
+        /* speech synthesis not supported */
+    }
+}
 
+
+if ('speechSynthesis' in window){
+    var synth = speechSynthesis;
+    var flag = false;
+ 
+    /* references to the buttons */
+    var playEl = document.querySelector('#play');
+    var pauseEl = document.querySelector('#pause');
+    var stopEl = document.querySelector('#stop');
+ 
+    /* click event handlers for the buttons */
+    playEl.addEventListener('click', onClickPlay);
+    pauseEl.addEventListener('click', onClickPause);
+    stopEl.addEventListener('click', onClickStop);
+ 
+    function onClickPlay() {
+        if(!flag){
+            flag = true;
+            utterance = new SpeechSynthesisUtterance(
+                  document.querySelector('#app').textContent);
+            utterance.voice = synth.getVoices()[3];
+            utterance.onend = function(){
+                flag = false;
+            };
+            synth.speak(utterance);
+        }
+        if(synth.paused) { /* unpause/resume narration */
+            synth.resume();
+        }
+    }
+    function onClickPause() {
+        if(synth.speaking && !synth.paused){ /* pause narration */
+            synth.pause();
+        }
+    }
+    function onClickStop() {
+        if(synth.speaking){ /* stop narration */
+            /* for safari */
+            flag = false;
+            synth.cancel();
+        }
+    }
+}
 
 stream1_url= 'https://bible-api.com/'+selections["stream1"]['book']+selections["stream1"]['range']
 stream2_url= 'https://bible-api.com/'+selections["stream2"]['book']+selections["stream2"]['range']
@@ -2313,11 +2364,7 @@ const vm = new Vue({
             this.loadStream3()
             this.loadStream4()
             this.loadStream5()
-            this.day_assign()
-            button = querySelector("#button")
-            button.setAttribute("v-show","false")
         },
-        
         async loadStream1() {
             axios({
                 method: 'get',
