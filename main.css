@@ -24,6 +24,10 @@ body {
     margin: 1em;
 }
 
+p, blockquote {
+    font-size: 2.8vh;
+}
+
 .stream {
     background-color: rgba(245, 245, 245, 0.186);
 }
@@ -44,4 +48,9 @@ blockquote, legend, p {
 
 .edit {
     float: right;
+}
+
+footer {
+    padding: 1em;
+    background-color: rgba(245, 245, 245, 0.414)
 }

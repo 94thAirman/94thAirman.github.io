@@ -2296,13 +2296,14 @@ for (key in streamBreakout) {
     app.appendChild(fieldset)
     fieldset.appendChild(legend)
 
-    p = document.createElement("p")
+    p = document.createElement("blockquote")
     pName = "verse in" + stream + ".verses"
     p.setAttribute("v-for", pName)
     pKey = stream + ".verse"
     p.setAttribute(":key", pKey)
     verse = stream + ".text"
-    p.innerText = " {{" + verse + "}} "
+    p.innerText = "{{" + verse + "}} " 
+    
     fieldset.appendChild(p)
     box.appendChild(app)
 }
