@@ -2301,11 +2301,17 @@ if ('speechSynthesis' in window){
     pauseEl.addEventListener('click', onClickPause);
     stopEl.addEventListener('click', onClickStop);
  
+
+
+    
     function onClickPlay() {
         if(!flag){
             flag = true;
             utterance = new SpeechSynthesisUtterance(
-                  document.querySelector('#app').textContent);
+
+                  document.querySelector('#app').textContent
+                  
+                  );
             utterance.voice = synth.getVoices()[3];
             utterance.onend = function(){
                 flag = false;
@@ -2336,6 +2342,9 @@ stream3_url= 'https://bible-api.com/'+selections["stream3"]['book']+selections["
 stream4_url= 'https://bible-api.com/'+selections["stream4"]['book']+selections["stream4"]['range']
 stream5_url= 'https://bible-api.com/'+selections["stream5"]['book']+selections["stream5"]['range']
 
+
+
+
 const vm = new Vue({
     el: '#app',
     data: {
@@ -2365,7 +2374,7 @@ const vm = new Vue({
             this.loadStream4()
             this.loadStream5()
         },
-        async loadStream1() {
+        loadStream1() {
             axios({
                 method: 'get',
                 url: stream1_url+options[translation.value]
@@ -2385,7 +2394,7 @@ const vm = new Vue({
                 console.log(error.response.data)
             })
         },
-        async loadStream2() {
+        loadStream2() {
             axios({
                 method: 'get',
                 url: stream2_url+options[translation.value]
@@ -2406,7 +2415,7 @@ const vm = new Vue({
                 console.log(error.response.data)
             })
         },
-        async loadStream3() {
+        loadStream3() {
             axios({
                 method: 'get',
                 url: stream3_url+options[translation.value]
@@ -2426,7 +2435,7 @@ const vm = new Vue({
                 console.log(error.response.data)
             })
         },
-        async loadStream4() {
+        loadStream4() {
             axios({
                 method: 'get',
                 url: stream4_url+options[translation.value]
@@ -2446,7 +2455,7 @@ const vm = new Vue({
                 console.log(error.response.data)
             })
         },
-        async loadStream5() {
+        loadStream5() {
             axios({
                 method: 'get',
                 url: stream5_url+options[translation.value]
@@ -2466,11 +2475,13 @@ const vm = new Vue({
                 console.log(error.response.data)
             })
         }
+        
 
+    },
+    created: function(){
+        this.main()
     }
 })
-
-
 
 
 
