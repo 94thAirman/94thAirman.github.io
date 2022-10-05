@@ -18,25 +18,34 @@
             it's entirety throughout the year
         </blockquote>
         <nav>
+            <a id="head" href="#header">Home</a>
+            <hr>
             <a href="#stream1">Psalms & Proverbs</a>
+            <hr>
             <a href="#stream2">History Books</a>
+            <hr>
             <a href="#stream3">Prophets</a>
+            <hr>
             <a href="#stream4">Gospels & Acts</a>
+            <hr>
             <a href="#stream5">Epistles</a>
+            <hr>
         </nav>
     </header>
     <div id="app">
+        <br>
         <button id="button" @click="main"> Load Today's Selection  ({{ day }}) </button>
+        <br>
         <div id="stream1" class="stream">
             <fieldset >
                 <legend>
                        Psalms & Proverbs
                 </legend>
-                <details>
+                <details open>
                 <summary>
                     {{ stream1_range }} 
                 </summary>
-                <ol id="stream1_ol"> 
+                <ol v-model="stream1" id="stream1_ol"> 
                     <li v-for="verse in stream1.verses" :key="stream1.id"> 
                         <p> {{ verse.text }} </p>
                     </li>
@@ -50,11 +59,11 @@
                 <legend>
                        History Books
                 </legend>
-                <details>
+                <details open>
                 <summary>
                     {{ stream2_range }} 
                 </summary>
-                <ol id="stream2_ol"> 
+                <ol v-model="stream2" id="stream2_ol"> 
                     <li v-for="verse in stream2.verses" :key="stream2.id"> 
                         <p> {{ verse.text }} </p>
                     </li>
@@ -68,12 +77,12 @@
                 <legend >
                        Prophets
                 </legend>
-                <details>
+                <details open>
                     <summary>
                         {{ stream3_range }} 
                     </summary>
                 
-                <ol id="stream3_ol"> 
+                <ol v-model="stream3" id="stream3_ol"> 
                     <li v-for="verse in stream3.verses" :key="stream3.id"> 
                         <p> {{ verse.text }} </p>
                     </li>
@@ -87,12 +96,12 @@
                 <legend>
                       Gospels & Acts
                 </legend>
-                <details>
+                <details open>
                     <summary>
                         {{ stream4_range }}  
                     </summary>
                 
-                <ol id="stream4_ol"> 
+                <ol v-model="stream4" id="stream4_ol"> 
                     <li v-for="verse in stream4.verses" :key="stream4.id"> 
                         <p> {{ verse.text }} </p>
                     </li>
@@ -106,12 +115,12 @@
                 <legend>
                        Epistles
                 </legend>
-                <details>
+                <details open>
                     <summary>
                         {{ stream5_range }} 
                     </summary>
                 
-                <ol id="stream5_ol"> 
+                <ol v-model="stream5" id="stream5_ol"> 
                     <li v-for="verse in stream5.verses" :key="stream5.id"> 
                         <p> {{ verse.text }} </p>
                     </li>
