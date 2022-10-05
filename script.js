@@ -2232,9 +2232,9 @@ let translation = document.createElement("select")
 translation.setAttribute("v-model","translation")
 
 button = document.createElement("button")
-button.setAttribute("v-on:click", "main")
+// button.setAttribute("v-on:click", "main")
 button.innerText = "Load Selections"
-box.appendChild(button)
+// box.appendChild(button)
 
 julian = day
 for (key in yearReadingGuide) {
@@ -2248,9 +2248,9 @@ let legendName = ""
 k = 1
 
 let header = document.querySelector("header")
-let current_day = document.createElement("h2")
-header.appendChild(current_day)
-current_day.innerText = "date: " + dateRange[day]
+
+
+
 
 const options = {
     "King James Version":"?translation=kjv",
@@ -2274,39 +2274,8 @@ label.innerText = "translation"
 
 header.appendChild(translation)
 
+stream1_ol = document.querySelector("#stream1_ol")
 
-for (key in streamBreakout) {
-    stream = key
-    app = document.createElement("div")
-    app.className = "stream"
-    h2 = document.createElement("h2")
-    h2.innerText = streamBreakout[key]
-    app.appendChild(h2)
-    element = "#stream" + String(k)
-
-    console.log(key, element)
-    k++
-    
-    app.setAttribute("id",element)
-
-    fieldset = document.createElement("fieldset")
-    legend = document.createElement("legend")
-    legendName = "{{" + stream + "_range}}"
-    legend.innerText = legendName
-    app.appendChild(fieldset)
-    fieldset.appendChild(legend)
-
-    p = document.createElement("blockquote")
-    pName = "verse in" + stream + ".verses"
-    p.setAttribute("v-for", pName)
-    pKey = stream + ".verse"
-    p.setAttribute(":key", pKey)
-    verse = stream + ".text"
-    p.innerText = "{{" + verse + "}} " 
-    
-    fieldset.appendChild(p)
-    box.appendChild(app)
-}
 
 
 stream1_url= 'https://bible-api.com/'+selections["stream1"]['book']+selections["stream1"]['range']
@@ -2319,17 +2288,22 @@ const vm = new Vue({
     el: '#app',
     data: {
         translation: "",
-        day: "",
+        day: dateRange[day],
         stream1: {},
         stream1_range: "",
+        stream1_start: "",
         stream2: {},
         stream2_range: "",
+        stream2_start: "",
         stream3: {},
         stream3_range: "",
+        stream3_start: "",
         stream4: {},
         stream4_range: "",
+        stream4_start: "",
         stream5: {},
         stream5_range: "",
+        stream5_start: "",
     },
     methods: {
         main() {
@@ -2339,10 +2313,10 @@ const vm = new Vue({
             this.loadStream4()
             this.loadStream5()
             this.day_assign()
+            button = querySelector("#button")
+            button.setAttribute("v-show","false")
         },
-        day_assign() {
-            this.day = day
-        },
+        
         async loadStream1() {
             axios({
                 method: 'get',
@@ -2351,9 +2325,12 @@ const vm = new Vue({
             }).then(response => {
                 console.log(stream1_url)
                 this.stream1 = response.data
+                this.stream1_start = response.data['verses'][0]['verse']
+                console.log(this.stream1_start)
                 console.log(this.stream1)
-                this.stream1_range = selections["stream1"]['book'].toUpperCase() + " " + selections["stream1"]['range']
-                
+                this.stream1_range = response.data['reference']
+                stream1_ol = document.querySelector("#stream1_ol")
+                stream1_ol.setAttribute("start",this.stream1_start)
             }).catch(error => {
                 alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
                 console.log(error)
@@ -2368,8 +2345,12 @@ const vm = new Vue({
             }).then(response => {
                 console.log(stream2_url)
                 this.stream2 = response.data
+                this.stream2_start = response.data['verses'][0]['verse']
+                console.log(this.stream2_start)
                 console.log(this.stream2)
-                this.stream2_range = selections["stream2"]['book'].toUpperCase() + " " + selections["stream2"]['range']
+                this.stream2_range = response.data['reference']
+                stream2_ol = document.querySelector("#stream2_ol")
+                stream2_ol.setAttribute("start",this.stream2_start)
                 
             }).catch(error => {
                 alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
@@ -2385,8 +2366,12 @@ const vm = new Vue({
             }).then(response => {
                 console.log(stream3_url)
                 this.stream3 = response.data
+                this.stream3_start = response.data['verses'][0]['verse']
+                console.log(this.stream3_start)
                 console.log(this.stream3)
-                this.stream3_range = selections["stream3"]['book'].toUpperCase() + " " + selections["stream3"]['range']
+                this.stream3_range = response.data['reference']
+                stream3_ol = document.querySelector("#stream3_ol")
+                stream3_ol.setAttribute("start",this.stream3_start)
             }).catch(error => {
                 alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
                 console.log(error)
@@ -2401,8 +2386,12 @@ const vm = new Vue({
             }).then(response => {
                 console.log(stream4_url)
                 this.stream4 = response.data
+                this.stream4_start = response.data['verses'][0]['verse']
                 console.log(this.stream4)
-                this.stream4_range = selections["stream4"]['book'].toUpperCase() + " " + selections["stream4"]['range']
+                console.log(this.stream4_start)
+                this.stream4_range = response.data['reference']
+                stream4_ol = document.querySelector("#stream4_ol")
+                stream4_ol.setAttribute("start",this.stream4_start)
             }).catch(error => {
                 alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
                 console.log(error)
@@ -2417,8 +2406,12 @@ const vm = new Vue({
             }).then(response => {
                 console.log(stream5_url)
                 this.stream5 = response.data
+                this.stream5_start = response.data['verses'][0]['verse']
+                console.log(this.stream5_start)
                 console.log(this.stream5)
-                this.stream5_range = selections["stream5"]['book'].toUpperCase() + " " + selections["stream5"]['range']
+                this.stream5_range = response.data["reference"]
+                stream5_ol = document.querySelector("#stream5_ol")
+                stream5_ol.setAttribute("start",this.stream5_start)
             }).catch(error => {
                 alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
                 console.log(error)

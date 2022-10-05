@@ -8,12 +8,123 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    
     <header id="header">
         <h1>Ryan's Daily Bible Selection</h1>
-        
+        <blockquote> This site will give you a 
+            unique reading for each day of the 
+            year, allowing you to read through 
+            five sections of the bible through
+            it's entirety throughout the year
+        </blockquote>
+        <nav>
+            <a href="#stream1">Psalms & Proverbs</a>
+            <a href="#stream2">History Books</a>
+            <a href="#stream3">Prophets</a>
+            <a href="#stream4">Gospels & Acts</a>
+            <a href="#stream5">Epistles</a>
+        </nav>
     </header>
     <div id="app">
-        
+        <button id="button" @click="main"> Load Today's Selection  ({{ day }}) </button>
+        <div id="stream1" class="stream">
+            <fieldset >
+                <legend>
+                       Psalms & Proverbs
+                </legend>
+                <details>
+                <summary>
+                    {{ stream1_range }} 
+                </summary>
+                <ol id="stream1_ol"> 
+                    <li v-for="verse in stream1.verses" :key="stream1.id"> 
+                        <p> {{ verse.text }} </p>
+                    </li>
+                </ol>
+                </details>
+            </fieldset>
+        </div>
+
+        <div id="stream2" class="stream">
+            <fieldset >
+                <legend>
+                       History Books
+                </legend>
+                <details>
+                <summary>
+                    {{ stream2_range }} 
+                </summary>
+                <ol id="stream2_ol"> 
+                    <li v-for="verse in stream2.verses" :key="stream2.id"> 
+                        <p> {{ verse.text }} </p>
+                    </li>
+                </ol>
+                </details>
+            </fieldset>
+        </div>
+
+        <div id="stream3" class="stream">
+            <fieldset >
+                <legend >
+                       Prophets
+                </legend>
+                <details>
+                    <summary>
+                        {{ stream3_range }} 
+                    </summary>
+                
+                <ol id="stream3_ol"> 
+                    <li v-for="verse in stream3.verses" :key="stream3.id"> 
+                        <p> {{ verse.text }} </p>
+                    </li>
+                </ol>
+                </details>
+            </fieldset>
+        </div>
+
+        <div id="stream4" class="stream">
+            <fieldset >
+                <legend>
+                      Gospels & Acts
+                </legend>
+                <details>
+                    <summary>
+                        {{ stream4_range }}  
+                    </summary>
+                
+                <ol id="stream4_ol"> 
+                    <li v-for="verse in stream4.verses" :key="stream4.id"> 
+                        <p> {{ verse.text }} </p>
+                    </li>
+                </ol>
+                </details>
+            </fieldset>
+        </div>
+
+        <div id="stream5" class="stream">
+            <fieldset >
+                <legend>
+                       Epistles
+                </legend>
+                <details>
+                    <summary>
+                        {{ stream5_range }} 
+                    </summary>
+                
+                <ol id="stream5_ol"> 
+                    <li v-for="verse in stream5.verses" :key="stream5.id"> 
+                        <p> {{ verse.text }} </p>
+                    </li>
+                </ol>
+                </details>
+            </fieldset>
+        </div>
+
+
+
+
+
+
     </div>
     <footer>
         <p> Powered by: https://bible-api.com/</p>
