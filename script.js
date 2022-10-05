@@ -2349,7 +2349,7 @@ const vm = new Vue({
     el: '#app',
     data: {
         translation: "",
-        day: dateRange[day],
+        day: dateRange[day-1],
         stream1: {},
         stream1_range: "",
         stream1_start: "",

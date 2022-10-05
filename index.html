@@ -10,6 +10,7 @@
 <body>
 
     <header id="header">
+        
         <h1>Ryan's Daily Bible Selection</h1>
         <blockquote> This site will give you a 
             unique reading for each day of the 
@@ -38,6 +39,7 @@
         </nav>
     </header>
     <div id="app">
+        <input v-model="day">
         <br>
         <button id="button" @click="main"> Load Today's Selection  ({{ day }}) </button>
         <br>
