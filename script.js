@@ -2220,6 +2220,7 @@ Date.prototype.julianDate=function(){
     };
     
     day=(new Date().julianDate())
+// alert(day)
 dateKey = {}
 i=0
 let date
