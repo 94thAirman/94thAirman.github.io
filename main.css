@@ -84,6 +84,9 @@ blockquote {
 }
 
 footer {
+    background-image: url(94is.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin-right: 25vw;
     padding: 1vh;
     background-color: rgba(245, 245, 245, 0.414)
