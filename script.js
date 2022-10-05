@@ -2312,7 +2312,7 @@ if ('speechSynthesis' in window){
                   document.querySelector('#app').textContent
                   
                   );
-            utterance.voice = synth.getVoices()[3];
+            utterance.voice = synth.getVoices()[0];
             utterance.onend = function(){
                 flag = false;
             };
