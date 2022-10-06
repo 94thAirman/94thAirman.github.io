@@ -1822,9 +1822,9 @@ yearReadingGuide =  {'stream1': {0: {'book': 'psalms', 'range': '1'},
              361: {'book': 'revelation', 'range': '18-19'},
              362: {'book': 'revelation', 'range': '20'},
              363: {'book': 'revelation', 'range': '21'},
-             364: {'book': 'revelation', 'range': '22'}}}
+             364: {'book': 'revelation', 'range': '22'}}
+}
    
-
 dateRange = [
     '1/1',
     '1/2',
@@ -2201,7 +2201,8 @@ let streamBreakout = {
     'stream3':'Prophets',
     'stream4':'Gospels & Acts',
     'stream5':'Epistles'
-    }
+}
+
 let element
 i = 1
 let fieldset
@@ -2211,16 +2212,378 @@ const box = document.querySelector("#app")
 let button
 let legend
 selections = {}
-let day
-Date.prototype.julianDate=function(){
-    var j=parseInt((this.getTime()-new Date('Dec 30,'+(this.getFullYear()-1)+' 23:00:00').getTime())/86400000).toString(),
-    i=3-j.length;
-    while(i-->0)j=0+j;
-    return j
-    };
-    
-    day=(new Date().julianDate())
-// alert(day)
+let day 
+
+const dates = [
+    "2022-01-01",
+"2022-01-02",
+"2022-01-03",
+"2022-01-04",
+"2022-01-05",
+"2022-01-06",
+"2022-01-07",
+"2022-01-08",
+"2022-01-09",
+"2022-01-10",
+"2022-01-11",
+"2022-01-12",
+"2022-01-13",
+"2022-01-14",
+"2022-01-15",
+"2022-01-16",
+"2022-01-17",
+"2022-01-18",
+"2022-01-19",
+"2022-01-20",
+"2022-01-21",
+"2022-01-22",
+"2022-01-23",
+"2022-01-24",
+"2022-01-25",
+"2022-01-26",
+"2022-01-27",
+"2022-01-28",
+"2022-01-29",
+"2022-01-30",
+"2022-01-31",
+"2022-02-01",
+"2022-02-02",
+"2022-02-03",
+"2022-02-04",
+"2022-02-05",
+"2022-02-06",
+"2022-02-07",
+"2022-02-08",
+"2022-02-09",
+"2022-02-10",
+"2022-02-11",
+"2022-02-12",
+"2022-02-13",
+"2022-02-14",
+"2022-02-15",
+"2022-02-16",
+"2022-02-17",
+"2022-02-18",
+"2022-02-19",
+"2022-02-20",
+"2022-02-21",
+"2022-02-22",
+"2022-02-23",
+"2022-02-24",
+"2022-02-25",
+"2022-02-26",
+"2022-02-27",
+"2022-02-28",
+"2022-03-01",
+"2022-03-02",
+"2022-03-03",
+"2022-03-04",
+"2022-03-05",
+"2022-03-06",
+"2022-03-07",
+"2022-03-08",
+"2022-03-09",
+"2022-03-10",
+"2022-03-11",
+"2022-03-12",
+"2022-03-13",
+"2022-03-14",
+"2022-03-15",
+"2022-03-16",
+"2022-03-17",
+"2022-03-18",
+"2022-03-19",
+"2022-03-20",
+"2022-03-21",
+"2022-03-22",
+"2022-03-23",
+"2022-03-24",
+"2022-03-25",
+"2022-03-26",
+"2022-03-27",
+"2022-03-28",
+"2022-03-29",
+"2022-03-30",
+"2022-03-31",
+"2022-04-01",
+"2022-04-02",
+"2022-04-03",
+"2022-04-04",
+"2022-04-05",
+"2022-04-06",
+"2022-04-07",
+"2022-04-08",
+"2022-04-09",
+"2022-04-10",
+"2022-04-11",
+"2022-04-12",
+"2022-04-13",
+"2022-04-14",
+"2022-04-15",
+"2022-04-16",
+"2022-04-17",
+"2022-04-18",
+"2022-04-19",
+"2022-04-20",
+"2022-04-21",
+"2022-04-22",
+"2022-04-23",
+"2022-04-24",
+"2022-04-25",
+"2022-04-26",
+"2022-04-27",
+"2022-04-28",
+"2022-04-29",
+"2022-04-30",
+"2022-05-01",
+"2022-05-02",
+"2022-05-03",
+"2022-05-04",
+"2022-05-05",
+"2022-05-06",
+"2022-05-07",
+"2022-05-08",
+"2022-05-09",
+"2022-05-10",
+"2022-05-11",
+"2022-05-12",
+"2022-05-13",
+"2022-05-14",
+"2022-05-15",
+"2022-05-16",
+"2022-05-17",
+"2022-05-18",
+"2022-05-19",
+"2022-05-20",
+"2022-05-21",
+"2022-05-22",
+"2022-05-23",
+"2022-05-24",
+"2022-05-25",
+"2022-05-26",
+"2022-05-27",
+"2022-05-28",
+"2022-05-29",
+"2022-05-30",
+"2022-05-31",
+"2022-06-01",
+"2022-06-02",
+"2022-06-03",
+"2022-06-04",
+"2022-06-05",
+"2022-06-06",
+"2022-06-07",
+"2022-06-08",
+"2022-06-09",
+"2022-06-10",
+"2022-06-11",
+"2022-06-12",
+"2022-06-13",
+"2022-06-14",
+"2022-06-15",
+"2022-06-16",
+"2022-06-17",
+"2022-06-18",
+"2022-06-19",
+"2022-06-20",
+"2022-06-21",
+"2022-06-22",
+"2022-06-23",
+"2022-06-24",
+"2022-06-25",
+"2022-06-26",
+"2022-06-27",
+"2022-06-28",
+"2022-06-29",
+"2022-06-30",
+"2022-07-01",
+"2022-07-02",
+"2022-07-03",
+"2022-07-04",
+"2022-07-05",
+"2022-07-06",
+"2022-07-07",
+"2022-07-08",
+"2022-07-09",
+"2022-07-10",
+"2022-07-11",
+"2022-07-12",
+"2022-07-13",
+"2022-07-14",
+"2022-07-15",
+"2022-07-16",
+"2022-07-17",
+"2022-07-18",
+"2022-07-19",
+"2022-07-20",
+"2022-07-21",
+"2022-07-22",
+"2022-07-23",
+"2022-07-24",
+"2022-07-25",
+"2022-07-26",
+"2022-07-27",
+"2022-07-28",
+"2022-07-29",
+"2022-07-30",
+"2022-07-31",
+"2022-08-01",
+"2022-08-02",
+"2022-08-03",
+"2022-08-04",
+"2022-08-05",
+"2022-08-06",
+"2022-08-07",
+"2022-08-08",
+"2022-08-09",
+"2022-08-10",
+"2022-08-11",
+"2022-08-12",
+"2022-08-13",
+"2022-08-14",
+"2022-08-15",
+"2022-08-16",
+"2022-08-17",
+"2022-08-18",
+"2022-08-19",
+"2022-08-20",
+"2022-08-21",
+"2022-08-22",
+"2022-08-23",
+"2022-08-24",
+"2022-08-25",
+"2022-08-26",
+"2022-08-27",
+"2022-08-28",
+"2022-08-29",
+"2022-08-30",
+"2022-08-31",
+"2022-09-01",
+"2022-09-02",
+"2022-09-03",
+"2022-09-04",
+"2022-09-05",
+"2022-09-06",
+"2022-09-07",
+"2022-09-08",
+"2022-09-09",
+"2022-09-10",
+"2022-09-11",
+"2022-09-12",
+"2022-09-13",
+"2022-09-14",
+"2022-09-15",
+"2022-09-16",
+"2022-09-17",
+"2022-09-18",
+"2022-09-19",
+"2022-09-20",
+"2022-09-21",
+"2022-09-22",
+"2022-09-23",
+"2022-09-24",
+"2022-09-25",
+"2022-09-26",
+"2022-09-27",
+"2022-09-28",
+"2022-09-29",
+"2022-09-30",
+"2022-10-01",
+"2022-10-02",
+"2022-10-03",
+"2022-10-04",
+"2022-10-05",
+"2022-10-06",
+"2022-10-07",
+"2022-10-08",
+"2022-10-09",
+"2022-10-10",
+"2022-10-11",
+"2022-10-12",
+"2022-10-13",
+"2022-10-14",
+"2022-10-15",
+"2022-10-16",
+"2022-10-17",
+"2022-10-18",
+"2022-10-19",
+"2022-10-20",
+"2022-10-21",
+"2022-10-22",
+"2022-10-23",
+"2022-10-24",
+"2022-10-25",
+"2022-10-26",
+"2022-10-27",
+"2022-10-28",
+"2022-10-29",
+"2022-10-30",
+"2022-10-31",
+"2022-11-01",
+"2022-11-02",
+"2022-11-03",
+"2022-11-04",
+"2022-11-05",
+"2022-11-06",
+"2022-11-07",
+"2022-11-08",
+"2022-11-09",
+"2022-11-10",
+"2022-11-11",
+"2022-11-12",
+"2022-11-13",
+"2022-11-14",
+"2022-11-15",
+"2022-11-16",
+"2022-11-17",
+"2022-11-18",
+"2022-11-19",
+"2022-11-20",
+"2022-11-21",
+"2022-11-22",
+"2022-11-23",
+"2022-11-24",
+"2022-11-25",
+"2022-11-26",
+"2022-11-27",
+"2022-11-28",
+"2022-11-29",
+"2022-11-30",
+"2022-12-01",
+"2022-12-02",
+"2022-12-03",
+"2022-12-04",
+"2022-12-05",
+"2022-12-06",
+"2022-12-07",
+"2022-12-08",
+"2022-12-09",
+"2022-12-10",
+"2022-12-11",
+"2022-12-12",
+"2022-12-13",
+"2022-12-14",
+"2022-12-15",
+"2022-12-16",
+"2022-12-17",
+"2022-12-18",
+"2022-12-19",
+"2022-12-20",
+"2022-12-21",
+"2022-12-22",
+"2022-12-23",
+"2022-12-24",
+"2022-12-25",
+"2022-12-26",
+"2022-12-27",
+"2022-12-28",
+"2022-12-29",
+"2022-12-30",
+"2022-12-31",
+]
+
+let index
+
 dateKey = {}
 i=0
 let date
@@ -2229,7 +2592,7 @@ let date
 //     i++
 // }
 let translation = document.createElement("select")
-
+translation.setAttribute("id","translation")
 translation.setAttribute("v-model","translation")
 
 button = document.createElement("button")
@@ -2237,12 +2600,13 @@ button = document.createElement("button")
 button.innerText = "Load Selections"
 // box.appendChild(button)
 
-julian = day
-for (key in yearReadingGuide) {
-    streamBook = yearReadingGuide[key][julian-1]['book']
-    streamRange = yearReadingGuide[key][julian-1]['range']
-    selections[key]={'book':streamBook,'range':streamRange}
-}
+
+
+
+
+let date_value
+
+
 let pKey
 let pName
 let legendName = ""
@@ -2250,15 +2614,12 @@ k = 1
 
 let header = document.querySelector("header")
 
-
-
-
 const options = {
+    "World English Bible":"?translation=web",
     "King James Version":"?translation=kjv",
-    "Bible in Basic English":"?translation=bbe",
-    "World English Bible":"?translation=web"
+    "Bible in Basic English":"?translation=bbe"
+    
 }
-
 
 for (key in options) {
     
@@ -2266,16 +2627,17 @@ for (key in options) {
     option.innerText = key
     option.setAttribute("id",key)
     translation.appendChild(option)
-
-
 }
+
 let label = document.createElement("label")
 label.setAttribute("for","translation")
-label.innerText = "translation"
-
+label.innerText = "translation options"
+header.appendChild(label)
 header.appendChild(translation)
 
-stream1_ol = document.querySelector("#stream1_ol")
+
+
+
 
 onload = function() {
     if ('speechSynthesis' in window) {
@@ -2336,20 +2698,24 @@ if ('speechSynthesis' in window){
     }
 }
 
-stream1_url= 'https://bible-api.com/'+selections["stream1"]['book']+selections["stream1"]['range']
-stream2_url= 'https://bible-api.com/'+selections["stream2"]['book']+selections["stream2"]['range']
-stream3_url= 'https://bible-api.com/'+selections["stream3"]['book']+selections["stream3"]['range']
-stream4_url= 'https://bible-api.com/'+selections["stream4"]['book']+selections["stream4"]['range']
-stream5_url= 'https://bible-api.com/'+selections["stream5"]['book']+selections["stream5"]['range']
+Date.prototype.julianDate=function(){
+    var j=parseInt((this.getTime()-new Date('Dec 30,'+(this.getFullYear()-1)+' 23:00:00').getTime())/86400000).toString(),
 
-
-
-
+    i=3-j.length;
+    while(i-->0)j=0+j;
+    return j    
+}
+    
+day = (new Date().julianDate())
+julian = day
+// alert(day)
 const vm = new Vue({
     el: '#app',
     data: {
         translation: "",
-        day: dateRange[day-1],
+        current_day: dateRange[day-1],
+        selected_day: null,
+        day: "",
         stream1: {},
         stream1_range: "",
         stream1_start: "",
@@ -2367,12 +2733,54 @@ const vm = new Vue({
         stream5_start: "",
     },
     methods: {
+        
+        
+        update_selected_day() {
+            let date_value = document.querySelector("#date")
+            this.selected_day = date_value.value
+        },
+        update_selections() {
+            date = dateRange.indexOf(this.day)
+            console.log(this.day,date)
+            for (key in yearReadingGuide) {
+                streamBook = yearReadingGuide[key][date]['book']
+                streamRange = yearReadingGuide[key][date]['range']
+                selections[key]={'book':streamBook,'range':streamRange}
+            }
+            return selections
+            
+        },
         main() {
+            console.log("selected day:", this.selected_day)
+            console.log("current day:", this.current_day)
+            if (this.selected_day == null) {
+                console.log("current day used...")
+                this.day = this.current_day
+                selections = this.update_selections()
+
+            } else {
+                console.log("the selected day is not null!")
+                console.log("selected day used...")
+                i = dates.indexOf(this.selected_day)
+                console.log(i)
+                this.day = dateRange[i]
+                selections = this.update_selections()
+                
+            }
+            
+            stream1_url= 'https://bible-api.com/'+selections["stream1"]['book']+selections["stream1"]['range']
+            stream2_url= 'https://bible-api.com/'+selections["stream2"]['book']+selections["stream2"]['range']
+            stream3_url= 'https://bible-api.com/'+selections["stream3"]['book']+selections["stream3"]['range']
+            stream4_url= 'https://bible-api.com/'+selections["stream4"]['book']+selections["stream4"]['range']
+            stream5_url= 'https://bible-api.com/'+selections["stream5"]['book']+selections["stream5"]['range']
+
+
             this.loadStream1()
             this.loadStream2()
             this.loadStream3()
             this.loadStream4()
             this.loadStream5()
+
         },
         loadStream1() {
             axios({
@@ -2479,7 +2887,9 @@ const vm = new Vue({
 
     },
     created: function(){
+
         this.main()
+        
     }
 })
 

@@ -14,8 +14,10 @@ body {
     /* width: 100% */
 }
 
-h1 {
-    background-color:rgba(128, 0, 128, 0.176);
+h1, h2 {
+    color: white;
+    background-color:rgba(128, 0, 0, 0.344);
+    padding: 5vw;
     font-family: monospace;
 }
 
@@ -70,6 +72,8 @@ blockquote, legend, p, details {
 
 blockquote {
     padding: 1em;
+    padding-left: 5vw;
+    padding-right: 5vw;
     background-color: rgba(255, 235, 205, 0.362);
 }
 
@@ -122,7 +126,7 @@ a:hover {
     text-shadow: 0 0 1em black;
 }
 
-legend, summary:hover{
+legend, summary:hover, blockquote:hover {
     background-color:rgba(245, 245, 245, 0.186);
     box-shadow: 0 0 2em rgba(0, 0, 255, 0.833);
     border-radius: 1em 1em;
@@ -165,14 +169,20 @@ a {
 }
 
 header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     margin-right: 25vw;
 }
 
-#button {
-    padding: 4vh;
+#button, #translation, #date {
+    width:100%;
+    text-align: center;
+    padding: 2vh;
 }
 
-#button:hover {
+#button:hover, #translation:hover, #date:hover {
+
     background-color:rgba(230, 85, 85, 0.427);
     color: white;
     text-shadow: 0 0 pink;
@@ -180,4 +190,15 @@ header {
 
 #play,#pause,#stop {
     font-size: 1.2vh;
+}
+
+label {
+    font-family: monospace;
+    letter-spacing: 1vw;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 3vw;
+    background-color: rgba(255, 255, 255, 0.404);
+    width: 100%;
+    padding: 1vw 5vw
 }
