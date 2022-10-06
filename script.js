@@ -2638,7 +2638,7 @@ header.appendChild(translation)
 
 
 
-
+let select = document.querySelector("#select")
 onload = function() {
     if ('speechSynthesis' in window) {
         /* speech synthesis supported */
@@ -2663,15 +2663,16 @@ if ('speechSynthesis' in window){
     pauseEl.addEventListener('click', onClickPause);
     stopEl.addEventListener('click', onClickStop);
  
-
-
+   
+    const options_reading = {}
     
     function onClickPlay() {
+        
         if(!flag){
             flag = true;
             utterance = new SpeechSynthesisUtterance(
-
-                  document.querySelector('#app').textContent
+                  
+                  document.querySelector(select.value).textContent
                   
                   );
             utterance.voice = synth.getVoices()[0];
