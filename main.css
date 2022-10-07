@@ -91,7 +91,7 @@ footer {
     background-image: url(94is.png);
     background-repeat: no-repeat;
     background-size: cover;
-    margin-right: 25vw;
+    /* margin-right: 25vw; */
     padding: 1vh;
     background-color: rgba(245, 245, 245, 0.414)
 }
@@ -163,7 +163,7 @@ a {
     color:rgb(15, 15, 137)
 }
 
-#head {
+#head,  #search-a {
     background-color:rgba(0, 0, 255, 0.781);
     color: whitesmoke;
 }
@@ -201,4 +201,11 @@ label {
     background-color: rgba(255, 255, 255, 0.404);
     width: 100%;
     padding: 1vw 5vw
+}
+
+#search {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    margin-right: 25vw;
 }

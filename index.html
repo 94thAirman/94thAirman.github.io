@@ -17,6 +17,8 @@
                 <option value="#stream3"> Prophets </option>
                 <option value="#stream4"> Gospels & Acts </option>
                 <option value="#stream5"> Epistles </option>
+                <option value="#ot"> OT Reader</option>
+                <option value="#nt"> NT Reader</option>
 
             </select>
             <div id="player">
@@ -37,6 +39,7 @@
             <hr>
             <a href="#stream5">Epistles</a>
             <hr>
+            <a id="search-a" href="#search"> Search </a>
         </nav>
     
     <div id="app">
@@ -168,17 +171,80 @@
 
 
     </div>
+    
+    
+    <div id="search">
+        <div id='ot-reader'>
+            <h1>Old Testament* Bible Reader</h1>
+            *website I am pulling from only provides first verse for single chapter books for some strange reason
+            <br><br>
+            this code is a bit buggy, you have to first select book name, then chapter, then hit the 'update scripture' button. if an extra chapter drop down shows up, you will have to likely refresh page, sorry!
+    
+            <p> Powered by <a href="https://bible-api.com/"> bible-api.com </a> and Vue</p>
+            <div id="ot-input">
+                Choose book!
+            </div>  
+            <div id="app-ot">
+                
+                <fieldset>
+                    
+                    <button @click="loadOTVerses" id="ot-button">Update Scripture! (make sure chapter is selected also)</button> Click arrow to show/hide scripture
+                    
+                    <details id="ot">
+                        <summary v-if="otBibleVerses"> {{ otBibleVerses.reference }} </summary>
+                        
+                        <ol>
+                            <li v-for="verse in otBibleVerses.verses" :key="verse.id">
+                                <p>{{ verse.text }}</p>
+                            </li>
+                            
+                        </ol>
+                    </details>
+    
+                </fieldset>
+            </div>
+            <div id='nt-reader'>
+                <h1>New Testament* Bible Reader</h1>
+                *website I am pulling from only provides first verse for single chapter books for some strange reason
+                <br><br>
+                this code is a bit buggy, you have to first select book name, then chapter, then hit the 'update scripture' button. if an extra chapter drop down shows up, you will have to likely refresh page, sorry!
+        
+                <p> Powered by <a href="https://bible-api.com/"> bible-api.com </a> and Vue</p>
+                <div id="nt-input">
+                    Choose book!
+                </div>  
+                <div id="app-nt">
+                    
+                    <fieldset>
+                        
+                        <button @click="loadNTVerses" id="nt-button">Update Scripture! (make sure chapter is selected also)</button> Click arrow to show/hide scripture
+                        
+                        <details id="nt">
+                            <summary v-if="ntBibleVerses"> {{ ntBibleVerses.reference }} </summary>
+                            
+                            <ol>
+                                <li v-for="verse in ntBibleVerses.verses" :key="verse.id">
+                                    <p>{{ verse.text }}</p>
+                                </li>
+                                
+                            </ol>
+                        </details>
+        
+                    </fieldset>
+                </div>
+            </div>
+    </div>
+    
     <footer>
         <p> Powered by: https://bible-api.com, Vue, Axios</p>
         <p> Reading Schedule made by Elder Ron Kreins</p>
         <p> Dedicated to the Greatest Wingman: Senior Airman Ryan Shackleford, or better known to the Air Force intelligence community as Shack, may he continue to rest in peace</p>
         <p> Site Creator: Jonathon Cavada</p>
         <p> Last Update: 10/05/2022 ~3pm PST </p>
-    </footer>
-    
+    </footer>    
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>    
-    
+    <script src="search.js"></script>
 </body>
 </html>
