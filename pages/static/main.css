@@ -215,3 +215,8 @@ section {
     display: flex;
     flex-direction: column;
 }
+
+#project {
+    margin-right: 25vw;
+
+}
