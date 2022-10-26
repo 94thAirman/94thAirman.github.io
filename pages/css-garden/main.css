@@ -1,0 +1,565 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+img {
+	display: block;
+	max-width: 100%;
+}
+
+.page-wrapper {
+    border-radius: 2.5em;
+    margin-right: 25vw;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-bottom: 25vh;
+    background-color: gold;
+}
+
+/*
+
+INTRO
+
+*/
+
+
+.intro {
+    background-color: rgba(0, 128, 128, 0.403);
+
+}
+
+.intro header {
+    /* background-color: rgba(255, 0, 255, 0.354); */
+    padding: .51em;
+    text-transform: uppercase;
+}
+
+
+.summary {
+    background-color: rgba(210, 105, 30, 0.366);
+}
+
+.intro .preamble {
+    background-color: silver;
+    /* padding: .51em; */
+    
+
+}
+
+.intro h2 {
+    
+    color: white;
+    text-shadow: 0 0 .251em black ;
+    background-image: url(david.png);
+    background-repeat: no-repeat;
+}
+
+.preamble h3 {
+    color: black;
+    text-shadow: 0 0 .51em red ;
+    background-image: url(silk.png);
+    background-repeat: no-repeat;
+
+    text-transform: uppercase;
+}
+
+
+/*
+
+MAIN SUPPORTING
+
+*/
+
+.main-supporting {
+    
+    /* gap: 1em; */
+    background-color: cyan;
+    /* padding: .51em; */
+}
+
+.explanation {
+    background-color: greenyellow;
+    /* padding: .51em; */
+
+}
+
+.explanation h3 {
+    background-image: url(confuse.png);
+    background-repeat: no-repeat;
+
+    background-position: center;
+    color: red;
+    /* font-weight: 800; */
+    text-shadow: 0 0 .75em black;
+}
+
+.participation {
+    background-color: peachpuff;
+    /* padding: .51em; */
+
+}
+
+.participation h3 {
+    background-image: url(party.png);
+    background-repeat: no-repeat;
+
+    color: red;
+    /* font-weight: 800; */
+    text-shadow: 0 0 .75em black;
+}
+
+.benefits {
+    background-color: grey;
+    /* padding: .51em; */
+
+}
+
+.benefits h3 {
+    background-image: url(benny.png);
+    background-repeat: no-repeat;
+
+    color: red;
+    /* font-weight: 800; */
+    text-shadow: 0 0 .75em black;
+}
+
+
+.requirements {
+    background-color: #d8bfd8;
+    /* padding: .51em; */
+
+}
+
+.requirements h3 {
+    background-image: url(reqs.png);
+    background-repeat: no-repeat;
+
+    color: red;
+    /* font-weight: 800; */
+    text-shadow: 0 0 .75em black;
+}
+
+footer {
+
+    font-size: .9875em;
+    border: .251em solid rgba(0, 0, 0, 0.532);
+    letter-spacing: .051em;
+    left: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 800;
+    align-items: center;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: .751em;
+    background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    background-repeat: no-repeat;
+    bottom: 0vh;
+    height: s5vh;
+    color: lightcoral;
+    text-decoration: none;
+    right: 0;
+    /* margin: 1em; */
+}
+
+footer a {
+    padding: .7125em;
+    background-color: rgba(0, 213, 255, 0.538);
+    border: .125em groove rgba(0, 0, 0, 0.571);
+    border-radius: 4em;
+    color: lightcoral;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 0 0 1em black;
+}
+
+footer a:hover {
+    color: grey;
+    text-shadow: 0 0 .10em black;
+    box-shadow: 0 0 1em black;
+}
+
+p:hover {
+    color: black;
+    text-shadow: 0 0 .10em black;
+    background-color: rgba(71, 0, 71, 0.389);
+    font-family: helvetica;
+    /* font-size: 1.19em; */
+    font-weight: 250;
+    line-height: 1.325em;
+}
+
+/*
+
+ASIDE (SIDEBAR)
+
+*/
+
+.side-bar {
+    margin-bottom: 5vh;
+    border-radius: 5em;
+}
+
+/*
+
+DESIGN SELECTION:
+
+*/
+
+
+.design-selection {
+    align-items: center;
+    justify-content: center;
+    background-color:rgba(38, 28, 151, 0.342);
+    padding: 1em;
+    
+}
+
+.navigation {
+    /* width: vw; */
+    display: flex;
+    flex-direction: row;
+
+}
+
+.navigation li {
+
+    border: .1em solid black;
+}
+
+.design-selection ul {
+    padding: 0;
+    text-align: center;
+    /* width: 45%; */
+    justify-content: space-between;
+    gap: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.design-selection li {
+    /* width: 25vw; */
+    width: 45%;
+    gap:1em;
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+    padding: 1.5em .5em;
+    border: .051em solid black;
+}
+
+.design-name {
+    padding: 1em;
+    text-align: left;
+    margin-bottom: 10em;
+    padding-bottom: 5em;
+    /* width: 100%; */
+    font-size: 1.2em;
+    border: .1em solid rgba(0, 0, 0, 0.371);
+    top: 0;
+    left: 0
+    /* padding: 5em; */
+}
+
+.designer-name {
+
+    border: .1em solid rgba(0, 0, 0, 0.237);
+
+    padding: 1em;
+    padding-top: 5em;
+    text-align: right;
+    /* bottom: 0; */
+    /* right: 0; */
+}
+
+ul a {
+    
+    color: black;
+    text-decoration: none;
+    text-decoration-line: none;
+    
+}
+
+.design-selection a:hover {
+    box-shadow: 0 0 1em red;
+    border: .1em solid white;
+    color: rgba(255, 255, 255, 0.622);
+    font-weight: 650;
+    background-color: rgba(0, 0, 0, 0.639);
+    text-shadow: 0 0 1em black;
+}
+
+.design-selection li:nth-of-type(1):hover {
+    background-image: url(1.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+
+
+.design-selection li:nth-of-type(2):hover {
+    background-image: url(2.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+.design-selection li:nth-of-type(3):hover {
+    background-image: url(3.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+.design-selection li:nth-of-type(4):hover {
+    background-image: url(4.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+.design-selection li:nth-of-type(5):hover {
+    background-image: url(5.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+.design-selection li:nth-of-type(6):hover {
+    background-image: url(6.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+.design-selection li:nth-of-type(7):hover {
+    background-image: url(7.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+.design-selection li:nth-of-type(8):hover {
+    background-image: url(8.png);
+    background-repeat: no-repeat;
+
+    color: rgba(0, 0, 0, 0);
+    /* position: absolute; */
+    background-position: fill;
+}
+
+
+.design-selection h3 {
+    background-image: url(select.png);
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+}
+
+.design-archives h3 {
+    background-image: url(arch.png);
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.design-archives ul {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.design-archives a {
+    margin: 0;
+    padding: 1em;
+    background-color: white;
+}
+
+.design-archives a:hover {
+    margin: 0;
+    padding: 1em;
+    background-color: black;
+    color: white;
+}
+
+/*
+
+RESOURCES
+
+*/
+
+.zen-resources {
+    border-radius: 4em;
+    background-color: rgba(0, 128, 128, 0.355);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-transform: uppercase;
+    width: 30vw;
+    font-size: .61em;
+    /* top: 5vh; */
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    height: 90vh;
+    letter-spacing: .124em;
+    bottom: 12vh;
+    /* text-align: right; */
+    /* gap: 1em; */
+    /* text-transform: full-width; */
+}
+
+.zen-resources h3 {
+    /* margin-top: 2em; */
+    /* transform: rotate(-50deg); */
+    font-family: monospace;
+    font-size: 1.5em;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.212);
+    height: 10vh;
+    line-height: 10vh;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: .25em;
+    /* vertical-align: middle; */
+    /* border-radius: 5vh; */
+    /* width: 100%; */
+}
+
+.zen-resources ul {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    /* gap: 1em; */
+    height: 100%;
+    /* border: 1em solid rgba(0, 0, 0, 0.107); */
+    justify-content: space-around
+}
+
+.zen-resources li {
+    /* width: 100%; */
+    display: block;
+    /* border: 1em solid rgba(0, 0, 0, 0.107); */
+    text-decoration: none;
+    text-decoration-line: none;
+    /* background-color: rgba(0, 0, 0, 0.07); */
+    border-radius: 5em;
+    /* padding: 1em; */
+    text-align: center;
+}
+
+.zen-resources a {
+    transform: rotate(-50deg);
+    font-weight: 750;
+    display: block;
+    border: 1em solid rgba(0, 0, 0, 0.107);
+    text-decoration: none;
+    text-decoration-line: none;
+    /* background-color: rgba(0, 0, 0, 0.07); */
+    border-radius: 5em;
+    /* padding: 1em; */
+    text-align: center;
+}
+
+.zen-resources a:hover {
+    /* transform: rotate(-45deg); */
+    background-color: rgb(39, 28, 151);
+    color: white;
+    border: 1em solid rgba(0, 0, 0, 0.526);
+    letter-spacing: .425em;
+
+    
+}
+
+h1 {
+    background-image: url('https://th.bing.com/th/id/R.602ababfa54825b3359acd744ee71070?rik=2Vbn5ODdtQzoXQ&riu=http%3a%2f%2ffr1.grepolismaps.org%2fshowmap.php%3fid%3d&ehk=wDvjYbiqAc%2bzXaqqRBpyd3Ge3rXZOv118eLHnQy%2bH%2f8%3d&risl=&pid=ImgRaw&r=0');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    padding: .75em;
+    text-align: center;
+    font-family:  "Lucida Console", "Courier New", monospace;;
+    color: black;
+    text-shadow: 0 0 1em black;
+
+}   
+
+h2 {
+
+
+    font-size: 1em;
+    /* vertical-align: center; */
+}
+
+h3 {
+    padding: .75em;
+
+    text-align: center;
+    font-family: monospace;
+}
+
+
+p {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1em;
+}
+
+
+
+/*
+
+
+
+*/
+
+
+
+/*
+
+
+
+*/
+
+h1, h2, h3 {
+    padding: 7.5vw;
+    border: .1em solid black
+}
+
+h1, h2, h3 {
+    
+    padding-top: 55vw;
+}
+
+h2 {
+    padding-bottom: 55vw;
+}
+
+.zen-resources h3 {
+    padding: 1em;
+}
+
+ul {
+    list-style: none;
+}
