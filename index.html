@@ -9,7 +9,6 @@
 </head>
 <body>
 
-        <a href="../index.html"> Return to 'Landing Page' </a>
         <nav>
             <select id="select">
                 <option value="#stream1"> Psalms & Proverbs </option>
@@ -48,24 +47,15 @@
         
             <h1>Ryan's Daily Bible Selection</h1>
             <h2> Today's Date: {{current_day}} </h2>
-            <blockquote> This site was created using Elder Ron Kreins
-                year-long Bible reading schedule that consists of five
-                separate "streams" that allows the reader to consume
-                5 different portions of the Bible every day throughout the 
-                year for a varied daily digest of scripture. 
+            <blockquote> ### Add an About link ###
             </blockquote>  
             <blockquote>
-                This site is dedicated to the late Ryan "Shack" Shackleford.
-                Ryan served in the world's greatest Air Force with 
-                distinguishment as a Pashto linguist supporting force
-                protection sorties to provide near-real time intel to
-                US and coalition warfighters, but he is my hero for being
-                my friend without condition, and I sorely miss him.    
+                ### Add a Shack Link ###   
             </blockquote>
-            <label for="date"> Date Selector </label>
+            <label for="date"> Select Passage Date </label>
             <input v-model="selected_day" id="date" type="date">
         <br>
-        <label for="button"> Load Button </label>
+        <label for="button"> Load Scripture </label>
         <button id="button" @click="main"> Day: {{ day }} </button>
         
         <br>
