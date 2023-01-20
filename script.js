@@ -2631,9 +2631,10 @@ for (key in options) {
 
 let label = document.createElement("label")
 label.setAttribute("for","translation")
-label.innerText = "translation options"
-header.appendChild(label)
-header.appendChild(translation)
+label.innerText = "Translation Options"
+header.prepend(translation)
+header.prepend(label)
+
 
 
 

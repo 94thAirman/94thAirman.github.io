@@ -42,11 +42,11 @@
         </nav>
     
     <div id="app">
-        
+        <h1>Ryan's Daily Bible Selection</h1>
+            <h2> Today's Date: {{current_day}} </h2>
         <header id="header">
         
-            <h1>Ryan's Daily Bible Selection</h1>
-            <h2> Today's Date: {{current_day}} </h2>
+            
             <!-- <blockquote> ### Add an About link ### -->
             <!-- </blockquote>   -->
             <!-- <blockquote> -->
@@ -54,11 +54,11 @@
             <!-- </blockquote> -->
             <label for="date"> Select Passage Date </label>
             <input v-model="selected_day" id="date" type="date">
-        <br>
+        
         <label for="button"> Load Scripture </label>
         <button id="button" @click="main"> Day: {{ day }} </button>
         
-        <br>
+        
         </header>
         
         
@@ -67,7 +67,7 @@
                 <legend>
                        Psalms & Proverbs
                 </legend>
-                <details open>
+                <details>
                 <summary>
                     {{ stream1_range }} 
                 </summary>
@@ -85,7 +85,7 @@
                 <legend>
                        History Books
                 </legend>
-                <details open>
+                <details>
                 <summary>
                     {{ stream2_range }} 
                 </summary>
@@ -103,7 +103,7 @@
                 <legend >
                        Prophets
                 </legend>
-                <details open>
+                <details>
                     <summary>
                         {{ stream3_range }} 
                     </summary>
@@ -122,7 +122,7 @@
                 <legend>
                       Gospels & Acts
                 </legend>
-                <details open>
+                <details>
                     <summary>
                         {{ stream4_range }}  
                     </summary>
@@ -141,7 +141,7 @@
                 <legend>
                        Epistles
                 </legend>
-                <details open>
+                <details>
                     <summary>
                         {{ stream5_range }} 
                     </summary>
@@ -163,7 +163,7 @@
     </div>
     
     
-    <div id="search">
+    <!-- <div id="search">
         <div id='ot-reader'>
             <h1>Old Testament* Bible Reader</h1>
             *website I am pulling from only provides first verse for single chapter books for some strange reason
@@ -223,7 +223,7 @@
                     </fieldset>
                 </div>
             </div>
-    </div>
+    </div> -->
     
     <footer>
         <p> Powered by: https://bible-api.com, Vue, Axios</p>
@@ -235,6 +235,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>    
-    <script src="search.js"></script>
+    <!-- <script src="search.js"></script> -->
 </body>
 </html>

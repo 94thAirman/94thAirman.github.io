@@ -173,12 +173,14 @@ header {
     display: flex;
     flex-direction: column;
     margin-right: 25vw;
+    gap: 1em;
 }
 
 #button, #translation, #date {
-    width:100%;
+    /* width:100%; */
     text-align: center;
     padding: 2vh;
+    gap: 1em;
 }
 
 #button:hover, #translation:hover, #date:hover {
@@ -195,11 +197,11 @@ header {
 label {
     font-family: monospace;
     letter-spacing: 1vw;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     text-align: center;
     font-size: 3vw;
     background-color: rgba(255, 255, 255, 0.404);
-    width: 100%;
+    /* width: 100%; */
     padding: 1vw 5vw
 }
 
@@ -222,5 +224,5 @@ section {
 }
 
 details {
-    
+    open: false
 }
