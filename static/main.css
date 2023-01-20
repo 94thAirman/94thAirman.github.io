@@ -196,7 +196,7 @@ header {
 
 label {
     font-family: monospace;
-    letter-spacing: 1vw;
+    /* letter-spacing: 1vw; */
     /* text-transform: uppercase; */
     text-align: center;
     font-size: 3vw;

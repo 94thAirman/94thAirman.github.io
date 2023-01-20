@@ -2676,7 +2676,7 @@ if ('speechSynthesis' in window){
                   document.querySelector(select.value).textContent
                   
                   );
-            utterance.voice = synth.getVoices()[1];
+            utterance.voice = synth.getVoices()[5];
             utterance.onend = function(){
                 flag = false;
             };
