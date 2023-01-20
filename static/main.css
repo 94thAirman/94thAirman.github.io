@@ -183,7 +183,7 @@ header {
     gap: 1em;
 }
 
-#button:hover, #translation:hover, #date:hover {
+#button:hover, #translation:hover, #date:hover, legend:hover {
 
     background-color:rgba(230, 85, 85, 0.427);
     color: white;
