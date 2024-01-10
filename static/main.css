@@ -55,7 +55,7 @@ legend {
 
 .stream {
     background-color: rgba(143, 143, 143, 0.186);
-    margin-right: 25vw;
+    /*margin-right: 25vw;*/
 }
 
 fieldset {
@@ -135,11 +135,11 @@ legend, summary:hover, blockquote:hover {
     text-shadow: 0 0 1em black;
 }
 
-nav {
-    /* font-size: 1vw; */
+/*nav {
+     font-size: 1vw; 
     font-weight: 800;
     padding: .5em;
-    /* margin: 1em; */
+     margin: 1em; 
     display: flex;
     flex-direction: column;
     text-align:center;
@@ -150,7 +150,7 @@ nav {
     position: fixed;
     right:1vw;
     top: 0;
-}
+}*/
 
 a {
     height: 7vh;
@@ -209,7 +209,7 @@ label {
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
-    margin-right: 25vw;
+    
 }
 
 section {
@@ -223,6 +223,3 @@ section {
 
 }
 
-details {
-    open: false
-}

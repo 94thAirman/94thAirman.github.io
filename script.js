@@ -2644,28 +2644,28 @@ header.prepend(label)
 
 
 
-
+/*
 let select = document.querySelector("#select")
 onload = function() {
     if ('speechSynthesis' in window) {
-        /* speech synthesis supported */
+        
     }
     else {
-        /* speech synthesis not supported */
+          
     }
 }
-
-
+*/
+/*
 if ('speechSynthesis' in window){
     var synth = speechSynthesis;
     var flag = false;
  
-    /* references to the buttons */
+    
     var playEl = document.querySelector('#play');
     var pauseEl = document.querySelector('#pause');
     var stopEl = document.querySelector('#stop');
  
-    /* click event handlers for the buttons */
+    
     playEl.addEventListener('click', onClickPlay);
     pauseEl.addEventListener('click', onClickPause);
     stopEl.addEventListener('click', onClickStop);
@@ -2688,23 +2688,23 @@ if ('speechSynthesis' in window){
             };
             synth.speak(utterance);
         }
-        if(synth.paused) { /* unpause/resume narration */
+        if(synth.paused) { 
             synth.resume();
         }
     }
     function onClickPause() {
-        if(synth.speaking && !synth.paused){ /* pause narration */
+        if(synth.speaking && !synth.paused){ 
             synth.pause();
         }
     }
     function onClickStop() {
-        if(synth.speaking){ /* stop narration */
-            /* for safari */
+        if(synth.speaking){ 
+            
             flag = false;
             synth.cancel();
         }
     }
-}
+}*/
 
 Date.prototype.julianDate=function(){
     var j=parseInt((this.getTime()-new Date('Dec 30,'+(this.getFullYear()-1)+' 23:00:00').getTime())/86400000).toString(),
@@ -2721,7 +2721,7 @@ const vm = new Vue({
     el: '#app',
     data: {
         translation: "",
-        current_day: dateRange[day-1],
+        current_day: dates[day-1],
         selected_day: null,
         day: "",
         stream1: {},
