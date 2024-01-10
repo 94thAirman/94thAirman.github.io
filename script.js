@@ -2721,7 +2721,8 @@ const vm = new Vue({
     el: '#app',
     data: {
         translation: "",
-        current_day: dates[day-1],
+        current_day: dateRange[day-1],
+        todays_date: dates[day-1],
         selected_day: null,
         day: "",
         stream1: {},
