@@ -2623,7 +2623,13 @@ let header = document.querySelector("header")
 const options = {
     "World English Bible":"?translation=web",
     "King James Version":"?translation=kjv",
-    "Bible in Basic English":"?translation=bbe"
+    "Bible in Basic English":"?translation=bbe",
+    "Chinese Union Version":"?translation=cuv",
+    "American Standard Version (1901)":"?translation=asv",
+    "Open English Bible, US Edition":"?translation=oeb-us",
+    "Young's Literal Translation(NT Only)":"?translation=ylt",
+    "Cherokee New Testament":"?translation=cherokee",
+    "Clementine Latin Vulgate":"?translation=clementine"
     
 }
 
