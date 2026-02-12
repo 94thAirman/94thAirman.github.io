@@ -1055,7 +1055,7 @@ yearReadingGuide =  {'stream1': {0: {'book': 'psalms', 'range': '1'},
              322: {'book': 'amos', 'range': '7'},
              323: {'book': 'amos', 'range': '8'},
              324: {'book': 'amos', 'range': '9'},
-             325: {'book': 'obadiah', 'range': '1:1-1-21'},
+             325: {'book': 'obadiah', 'range': '1-21'},
              326: {'book': 'jonah', 'range': '1'},
              327: {'book': 'jonah', 'range': '2'},
              328: {'book': 'jonah', 'range': '3'},
@@ -2620,7 +2620,7 @@ k = 1
 
 let header = document.querySelector("header")
 
-let options = {
+const options = {
     "World English Bible":"?translation=web",
     "King James Version":"?translation=kjv",
     "Bible in Basic English":"?translation=bbe",
@@ -2724,281 +2724,195 @@ day = (new Date().julianDate())
 julian = day
 // alert(day)
 const vm = new Vue({
-  el: '#app',
-  data: {
-    // existing schedule inputs
-    current_day: dateRange[day-1],
-    todays_date: dates[day-1],
-
-    // date selection
-    selected_day: null,
-    day: '',
-
-    // daily stream data
-    streams: {
-      stream1: null,
-      stream2: null,
-      stream3: null,
-      stream4: null,
-      stream5: null
+    el: '#app',
+    data: {
+        translation: "",
+        current_day: dateRange[day-1],
+        todays_date: dates[day-1],
+        selected_day: null,
+        day: "",
+        stream1: {},
+        stream1_range: "",
+        stream1_start: "",
+        stream2: {},
+        stream2_range: "",
+        stream2_start: "",
+        stream3: {},
+        stream3_range: "",
+        stream3_start: "",
+        stream4: {},
+        stream4_range: "",
+        stream4_start: "",
+        stream5: {},
+        stream5_range: "",
+        stream5_start: "",
     },
-    ranges: {
-      stream1: '',
-      stream2: '',
-      stream3: '',
-      stream4: '',
-      stream5: ''
-    },
-    starts: {
-      stream1: 1,
-      stream2: 1,
-      stream3: 1,
-      stream4: 1,
-      stream5: 1
-    },
+    methods: {
+        
+        
+        update_selected_day() {
+            let date_value = document.querySelector("#date")
+            this.selected_day = date_value.value
+        },
+        update_selections() {
+            date = dateRange.indexOf(this.day)
+            console.log(this.day,date)
+            for (key in yearReadingGuide) {
+                streamBook = yearReadingGuide[key][date]['book']
+                streamRange = yearReadingGuide[key][date]['range']
+                selections[key]={'book':streamBook,'range':streamRange}
+            }
+            return selections
+            
+        },
+        main() {
+            console.log("selected day:", this.selected_day)
+            console.log("current day:", this.current_day)
+            if (this.selected_day == null) {
+                console.log("current day used...")
+                this.day = this.current_day
+                selections = this.update_selections()
 
-    // per-stream UI state
-    streamLoading: {
-      stream1: false,
-      stream2: false,
-      stream3: false,
-      stream4: false,
-      stream5: false
-    },
-    streamError: {
-      stream1: '',
-      stream2: '',
-      stream3: '',
-      stream4: '',
-      stream5: ''
-    },
+            } else {
+                console.log("the selected day is not null!")
+                console.log("selected day used...")
+                i = dates.indexOf(this.selected_day)
+                console.log(i)
+                this.day = dateRange[i]
+                selections = this.update_selections()
+                
+            }
+            
+            stream1_url= 'https://bible-api.com/'+selections["stream1"]['book']+selections["stream1"]['range']
+            stream2_url= 'https://bible-api.com/'+selections["stream2"]['book']+selections["stream2"]['range']
+            stream3_url= 'https://bible-api.com/'+selections["stream3"]['book']+selections["stream3"]['range']
+            stream4_url= 'https://bible-api.com/'+selections["stream4"]['book']+selections["stream4"]['range']
+            stream5_url= 'https://bible-api.com/'+selections["stream5"]['book']+selections["stream5"]['range']
 
-    // overall UI state
-    mainLoading: false,
 
-    // preferences
-    fontSize: 18,
-    darkMode: false,
+            this.loadStream1()
+            this.loadStream2()
+            this.loadStream3()
+            this.loadStream4()
+            this.loadStream5()
 
-    // internal
-    _lastDateISO: null,
-    _lastSelections: null
-  },
-
-  methods: {
-    // ---------- preferences ----------
-    loadPreferences() {
-      try {
-        const raw = localStorage.getItem('dailyBiblePrefs');
-        const p = raw ? JSON.parse(raw) : {};
-        if (typeof p.fontSize === 'number') this.fontSize = p.fontSize;
-        if (typeof p.darkMode === 'boolean') this.darkMode = p.darkMode;
-      } catch (e) {}
-      this.applyPreferences();
-    },
-
-    applyPreferences() {
-      document.body.style.setProperty('--font-size', this.fontSize + 'px');
-      document.body.classList.toggle('dark', !!this.darkMode);
-      try {
-        localStorage.setItem('dailyBiblePrefs', JSON.stringify({ fontSize: this.fontSize, darkMode: this.darkMode }));
-      } catch (e) {}
-    },
-
-    toggleDark() {
-      this.darkMode = !this.darkMode;
-      this.applyPreferences();
-    },
-
-    // ---------- date + selections ----------
-    getActiveDateISO() {
-      // Selected date comes from <input type="date"> as YYYY-MM-DD; if none selected, use today's schedule date.
-      return this.selected_day || this.todays_date;
-    },
-
-    update_selections() {
-      const dateIdx = dateRange.indexOf(this.day);
-      for (key in yearReadingGuide) {
-        const streamBook = yearReadingGuide[key][dateIdx]['book'];
-        const streamRange = yearReadingGuide[key][dateIdx]['range'];
-        selections[key] = { book: streamBook, range: streamRange };
-      }
-      return selections;
-    },
-
-    getTranslationQuery() {
-      // translation <select> is created earlier in this script and appended to the header.
-      const el = document.getElementById('translation');
-      const selected = el ? el.value : 'World English Bible';
-      return options[selected] || '';
-    },
-
-    buildStreamUrl(streamKey, translationQuery) {
-      const sel = this._lastSelections && this._lastSelections[streamKey];
-      if (!sel) return null;
-      // Your yearReadingGuide ranges are already built in the format bible-api.com expects.
-      return 'https://bible-api.com/' + sel.book + sel.range + translationQuery;
-    },
-
-    // ---------- caching ----------
-    cacheKey(dateISO) {
-      return 'dailyReadings:' + dateISO;
-    },
-
-    loadFromCache(dateISO) {
-      try {
-        const raw = localStorage.getItem(this.cacheKey(dateISO));
-        if (!raw) return false;
-        const obj = JSON.parse(raw);
-        if (!obj || !obj.streams) return false;
-
-        // Only reuse cache if translation hasn't changed
-        if (obj.translationQuery !== this.getTranslationQuery()) return false;
-
-        this.ranges = obj.ranges || this.ranges;
-        this.starts = obj.starts || this.starts;
-        this.streams = obj.streams || this.streams;
-
-        this.$nextTick(() => this.applyOlStarts());
-        return true;
-      } catch (e) {
-        return false;
-      }
-    },
-
-    saveToCache(dateISO, translationQuery) {
-      try {
-        const payload = {
-          translationQuery,
-          ranges: this.ranges,
-          starts: this.starts,
-          streams: this.streams
-        };
-        localStorage.setItem(this.cacheKey(dateISO), JSON.stringify(payload));
-      } catch (e) {}
-    },
-
-    // ---------- DOM helpers ----------
-    applyOlStarts() {
-      // Keep your <ol start="..."> behavior, but do it safely.
-      for (let n = 1; n <= 5; n++) {
-        const key = 'stream' + n;
-        const ol = document.getElementById(key + '_ol');
-        if (ol && this.starts[key] != null) {
-          ol.setAttribute('start', String(this.starts[key]));
+        },
+        loadStream1() {
+            axios({
+                method: 'get',
+                url: stream1_url+options[translation.value]
+                
+            }).then(response => {
+                console.log(stream1_url)
+                this.stream1 = response.data
+                this.stream1_start = response.data['verses'][0]['verse']
+                console.log(this.stream1_start)
+                console.log(this.stream1)
+                this.stream1_range = response.data['reference']
+                stream1_ol = document.querySelector("#stream1_ol")
+                stream1_ol.setAttribute("start",this.stream1_start)
+            }).catch(error => {
+                alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
+                console.log(error)
+                console.log(error.response.data)
+            })
+        },
+        loadStream2() {
+            axios({
+                method: 'get',
+                url: stream2_url+options[translation.value]
+                
+            }).then(response => {
+                console.log(stream2_url)
+                this.stream2 = response.data
+                this.stream2_start = response.data['verses'][0]['verse']
+                console.log(this.stream2_start)
+                console.log(this.stream2)
+                this.stream2_range = response.data['reference']
+                stream2_ol = document.querySelector("#stream2_ol")
+                stream2_ol.setAttribute("start",this.stream2_start)
+                
+            }).catch(error => {
+                alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
+                console.log(error)
+                console.log(error.response.data)
+            })
+        },
+        loadStream3() {
+            axios({
+                method: 'get',
+                url: stream3_url+options[translation.value]
+                
+            }).then(response => {
+                console.log(stream3_url)
+                this.stream3 = response.data
+                this.stream3_start = response.data['verses'][0]['verse']
+                console.log(this.stream3_start)
+                console.log(this.stream3)
+                this.stream3_range = response.data['reference']
+                stream3_ol = document.querySelector("#stream3_ol")
+                stream3_ol.setAttribute("start",this.stream3_start)
+            }).catch(error => {
+                alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
+                console.log(error)
+                console.log(error.response.data)
+            })
+        },
+        loadStream4() {
+            axios({
+                method: 'get',
+                url: stream4_url+options[translation.value]
+                
+            }).then(response => {
+                console.log(stream4_url)
+                this.stream4 = response.data
+                this.stream4_start = response.data['verses'][0]['verse']
+                console.log(this.stream4)
+                console.log(this.stream4_start)
+                this.stream4_range = response.data['reference']
+                stream4_ol = document.querySelector("#stream4_ol")
+                stream4_ol.setAttribute("start",this.stream4_start)
+            }).catch(error => {
+                alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
+                console.log(error)
+                console.log(error.response.data)
+            })
+        },
+        loadStream5() {
+            axios({
+                method: 'get',
+                url: stream5_url+options[translation.value]
+                
+            }).then(response => {
+                console.log(stream5_url)
+                this.stream5 = response.data
+                this.stream5_start = response.data['verses'][0]['verse']
+                console.log(this.stream5_start)
+                console.log(this.stream5)
+                this.stream5_range = response.data["reference"]
+                stream5_ol = document.querySelector("#stream5_ol")
+                stream5_ol.setAttribute("start",this.stream5_start)
+            }).catch(error => {
+                alert("ERROR: Make sure to select a book, and then select a chapter number from dropdown lists")
+                console.log(error)
+                console.log(error.response.data)
+            })
         }
-      }
+        
+
     },
+    created: function(){
 
-    // ---------- fetching ----------
-    async fetchStream(streamKey) {
-      const translationQuery = this.getTranslationQuery();
-      const url = this.buildStreamUrl(streamKey, translationQuery);
-
-      if (!url) {
-        this.streamError[streamKey] = 'Missing stream selection.';
-        return;
-      }
-
-      this.streamLoading[streamKey] = true;
-      this.streamError[streamKey] = '';
-
-      try {
-        const response = await axios.get(url);
-
-        // bible-api typically returns { reference, verses:[...], text, translation_id, ... }
-        const data = response.data;
-
-        this.streams[streamKey] = data;
-        this.ranges[streamKey] = data.reference || '';
-        const first = (data.verses && data.verses.length) ? data.verses[0].verse : 1;
-        this.starts[streamKey] = first || 1;
-
-        this.$nextTick(() => this.applyOlStarts());
-      } catch (e) {
-        this.streamError[streamKey] = 'Couldn\'t load this reading. Tap Retry.';
-        console.log(e);
-      } finally {
-        this.streamLoading[streamKey] = false;
-      }
-    },
-
-    async main() {
-      const dateISO = this.getActiveDateISO();
-
-      // Resolve day label
-      if (!this.selected_day) {
-        this.day = this.current_day;
-      } else {
-        const i = dates.indexOf(this.selected_day);
-        this.day = (i >= 0) ? dateRange[i] : this.current_day;
-      }
-
-      this._lastSelections = this.update_selections();
-      this._lastDateISO = dateISO;
-
-      // Reset UI
-      for (let n = 1; n <= 5; n++) {
-        const key = 'stream' + n;
-        this.streamError[key] = '';
-      }
-
-      // Cache hit?
-      if (this.loadFromCache(dateISO)) return;
-
-      this.mainLoading = true;
-
-      try {
-        await Promise.all([
-          this.fetchStream('stream1'),
-          this.fetchStream('stream2'),
-          this.fetchStream('stream3'),
-          this.fetchStream('stream4'),
-          this.fetchStream('stream5')
-        ]);
-
-        this.saveToCache(dateISO, this.getTranslationQuery());
-      } finally {
-        this.mainLoading = false;
-      }
-    },
-
-    retryStream(streamKey) {
-      // re-fetch one stream (no cache write necessary, but we can refresh cache after)
-      this.fetchStream(streamKey).then(() => {
-        if (this._lastDateISO) this.saveToCache(this._lastDateISO, this.getTranslationQuery());
-      });
-    },
-
-    async copyStream(streamKey) {
-      const s = this.streams[streamKey];
-      if (!s || !s.verses || !s.verses.length) return;
-
-      const title = (this.ranges[streamKey] || s.reference || streamKey).trim();
-      const text = s.verses.map(v => (v.text || '').trim()).join('\n');
-      const full = title + '\n\n' + text;
-
-      try {
-        await navigator.clipboard.writeText(full);
-      } catch (e) {
-        // fallback
-        const ta = document.createElement('textarea');
-        ta.value = full;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch (e2) {}
-        document.body.removeChild(ta);
-      }
+        this.main()
+        
     }
-  },
-
-  created: function () {
-    this.loadPreferences();
-    this.main();
-  }
 })
+
+
+
+
+
+
 
 // const vm2 = new Vue({
 //     el: "#app2",
