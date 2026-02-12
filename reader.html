@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bible Reader</title>
+<link href="main.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="topbar" style="margin: 12px auto; max-width: 980px;">
+<a href="index.html">← Daily Readings</a>
+<span class="mini">Preferences</span>
+<input aria-label="Font size" id="fontRange" max="26" min="14" step="1" type="range"/>
+<button id="darkToggle" style="min-width:120px;" type="button">Toggle theme</button>
+</div>
+
+<div id="reader-app" style="max-width:900px;margin:0 auto;padding:16px;">
+<p style="margin-bottom:12px;"><a href="index.html">← Back to Daily Readings</a></p>
+<h1>Bible Reader</h1>
+<p>Powered by <a href="https://bible-api.com/">bible-api.com</a>, Vue, Axios.</p>
+<fieldset style="margin-bottom:16px;">
+<legend>Testament</legend>
+<select v-model="testament">
+<option value="ot">Old Testament</option>
+<option value="nt">New Testament</option>
+</select>
+</fieldset>
+<fieldset style="margin-bottom:16px;">
+<legend>Pick a passage</legend>
+<label>Book</label>
+<select v-model="selectedBook">
+<option value="">-- select --</option>
+<option :key="b" :value="b" v-for="b in bookList">{{ b }}</option>
+</select>
+<label style="margin-left:12px;">Chapter</label>
+<select :disabled="!selectedBook" v-model="selectedChapter">
+<option value="">-- select --</option>
+<option :key="c" :value="c" v-for="c in chapters">{{ c }}</option>
+</select>
+<label style="margin-left:12px;" v-if="testament==='nt'">Translation</label>
+<select v-if="testament==='nt'" v-model="selectedTranslation">
+<option :key="name" :value="qs" v-for="(qs, name) in translations">{{ name }}</option>
+</select>
+</fieldset>
+<div style="padding:10px;border:1px solid #c33;margin-bottom:12px;" v-if="error">
+      {{ error }}
+    </div>
+<div style="margin-bottom:12px;" v-if="loading">Loading…</div>
+<details v-if="verses &amp;&amp; verses.verses &amp;&amp; verses.verses.length">
+<summary>{{ verses.reference }}</summary>
+<ol>
+<li :key="v.verse" v-for="v in verses.verses"><p>{{ v.text }}</p></li>
+</ol>
+</details>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="reader.js"></script>
+</body>
+</html>

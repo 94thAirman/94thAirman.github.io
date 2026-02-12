@@ -1,15 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan's Daily Bible Selection</title>
-    <link rel="stylesheet" href="static/main.css">
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ryan's Daily Bible Selection</title>
+<link href="main.css" rel="stylesheet"/>
 </head>
 <body>
-
-        <!--<nav>
+<!--<nav>
             <select id="select">
                 <option value="#stream1"> Psalms & Proverbs </option>
                 <option value="#stream2"> History Books </option>
@@ -28,201 +28,206 @@
             </div>
             
         </nav>-->
-    
-    <div id="app">
-        <h1>Ryan's Daily Bible Selection</h1>
-            <h2> Today's Date: {{todays_date}} </h2>
-        <header id="header">
-        
-            
-             <!--<blockquote> ### Add an About link ### -->
-            <!-- </blockquote>   -->
-            <!-- <blockquote> -->
-                <!-- ### Add a Shack Link ###    -->
-            <!-- </blockquote> -->
-            <label for="date"> Select Passage Date </label>
-            <input v-model="selected_day" id="date" type="date">
-        
-        <label for="button"> Load Scripture </label>
-        <button id="button" @click="main"> Day: {{ day }} </button>
-        
-        
-        </header>
-        
-        
-        <div id="stream1" class="stream">
-            <fieldset >
-                <legend>
-                       Psalms & Proverbs
-                </legend>
-                <details>
-                <summary>
-                    {{ stream1_range }} 
-                </summary>
-                <ol v-model="stream1" id="stream1_ol"> 
-                    <li v-for="verse in stream1.verses" :key="stream1.id"> 
-                        <p> {{ verse.text }} </p>
-                    </li>
-                </ol>
-                </details>
-            </fieldset>
-        </div>
+<div id="app">
+<h1>Ryan's Daily Bible Selection</h1>
+<h2> Today's Date: {{todays_date}} </h2>
+<header id="header">
+<div class="range" style="width:100%; justify-content:space-between;">
+<div class="mini">
+<a href="reader.html">Bible Reader</a>
+</div>
+<div class="range">
+<label class="mini" style="margin-right:6px;">Font</label>
+<input @input="applyPreferences" aria-label="Font size" max="26" min="14" step="1" type="range" v-model.number="fontSize"/>
+<button :class="darkMode ? 'primary' : ''" @click="toggleDark" style="min-width:120px;" type="button">
+      {{ darkMode ? 'Dark' : 'Light' }}
+    </button>
+</div>
+</div>
 
-        <div id="stream2" class="stream">
-            <fieldset >
-                <legend>
+<!--<blockquote> ### Add an About link ### -->
+<!-- </blockquote>   -->
+<!-- <blockquote> -->
+<!-- ### Add a Shack Link ###    -->
+<!-- </blockquote> -->
+<label for="date"> Select Date
+                 </label>
+<input id="date" type="date" v-model="selected_day"/>
+<label for="button"> Load Scripture </label>
+<button :disabled="mainLoading" @click="main" class="primary" id="button"> Day: {{ day }} </button>
+</header>
+<div class="stream" id="stream1">
+<fieldset>
+<legend>
+                       Psalms &amp; Proverbs
+                </legend>
+<div class="stream-actions">
+<button :disabled="!streams.stream1 || !(streams.stream1.verses &amp;&amp; streams.stream1.verses.length)" @click="copyStream('stream1')" type="button">Copy</button>
+<button :disabled="streamLoading.stream1" @click="retryStream('stream1')" type="button">Retry</button>
+<span class="mini" v-if="streamLoading.stream1"><span class="spinner"></span>Loading…</span>
+</div>
+<div class="alert" style="margin-top:10px;" v-if="streamError.stream1">{ streamError.stream1 }</div>
+
+<details>
+<summary>{{ ranges.stream1 }}</summary>
+<ol id="stream1_ol" v-model="stream1">
+<li :key="verse.verse" v-for="verse in (streams.stream1.verses || [])">
+<p> {{ verse.text }} </p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+<div class="stream" id="stream2">
+<fieldset>
+<legend>
                        History Books
                 </legend>
-                <details>
-                <summary>
-                    {{ stream2_range }} 
-                </summary>
-                <ol v-model="stream2" id="stream2_ol"> 
-                    <li v-for="verse in stream2.verses" :key="stream2.id"> 
-                        <p> {{ verse.text }} </p>
-                    </li>
-                </ol>
-                </details>
-            </fieldset>
-        </div>
+<div class="stream-actions">
+<button :disabled="!streams.stream2 || !(streams.stream2.verses &amp;&amp; streams.stream2.verses.length)" @click="copyStream('stream2')" type="button">Copy</button>
+<button :disabled="streamLoading.stream2" @click="retryStream('stream2')" type="button">Retry</button>
+<span class="mini" v-if="streamLoading.stream2"><span class="spinner"></span>Loading…</span>
+</div>
+<div class="alert" style="margin-top:10px;" v-if="streamError.stream2">{ streamError.stream2 }</div>
 
-        <div id="stream3" class="stream">
-            <fieldset >
-                <legend >
+<details>
+<summary>{{ ranges.stream2 }}</summary>
+<ol id="stream2_ol" v-model="stream2">
+<li :key="verse.verse" v-for="verse in (streams.stream2.verses || [])">
+<p> {{ verse.text }} </p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+<div class="stream" id="stream3">
+<fieldset>
+<legend>
                        Prophets
                 </legend>
-                <details>
-                    <summary>
-                        {{ stream3_range }} 
-                    </summary>
-                
-                <ol v-model="stream3" id="stream3_ol"> 
-                    <li v-for="verse in stream3.verses" :key="stream3.id"> 
-                        <p> {{ verse.text }} </p>
-                    </li>
-                </ol>
-                </details>
-            </fieldset>
-        </div>
+<div class="stream-actions">
+<button :disabled="!streams.stream3 || !(streams.stream3.verses &amp;&amp; streams.stream3.verses.length)" @click="copyStream('stream3')" type="button">Copy</button>
+<button :disabled="streamLoading.stream3" @click="retryStream('stream3')" type="button">Retry</button>
+<span class="mini" v-if="streamLoading.stream3"><span class="spinner"></span>Loading…</span>
+</div>
+<div class="alert" style="margin-top:10px;" v-if="streamError.stream3">{ streamError.stream3 }</div>
 
-        <div id="stream4" class="stream">
-            <fieldset >
-                <legend>
-                      Gospels & Acts
+<details>
+<summary>{{ ranges.stream3 }}</summary>
+<ol id="stream3_ol" v-model="stream3">
+<li :key="verse.verse" v-for="verse in (streams.stream3.verses || [])">
+<p> {{ verse.text }} </p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+<div class="stream" id="stream4">
+<fieldset>
+<legend>
+                      Gospels &amp; Acts
                 </legend>
-                <details>
-                    <summary>
-                        {{ stream4_range }}  
-                    </summary>
-                
-                <ol v-model="stream4" id="stream4_ol"> 
-                    <li v-for="verse in stream4.verses" :key="stream4.id"> 
-                        <p> {{ verse.text }} </p>
-                    </li>
-                </ol>
-                </details>
-            </fieldset>
-        </div>
+<div class="stream-actions">
+<button :disabled="!streams.stream4 || !(streams.stream4.verses &amp;&amp; streams.stream4.verses.length)" @click="copyStream('stream4')" type="button">Copy</button>
+<button :disabled="streamLoading.stream4" @click="retryStream('stream4')" type="button">Retry</button>
+<span class="mini" v-if="streamLoading.stream4"><span class="spinner"></span>Loading…</span>
+</div>
+<div class="alert" style="margin-top:10px;" v-if="streamError.stream4">{ streamError.stream4 }</div>
 
-        <div id="stream5" class="stream">
-            <fieldset >
-                <legend>
+<details>
+<summary>{{ ranges.stream4 }}</summary>
+<ol id="stream4_ol" v-model="stream4">
+<li :key="verse.verse" v-for="verse in (streams.stream4.verses || [])">
+<p> {{ verse.text }} </p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+<div class="stream" id="stream5">
+<fieldset>
+<legend>
                        Epistles
                 </legend>
-                <details>
-                    <summary>
-                        {{ stream5_range }} 
-                    </summary>
-                
-                <ol v-model="stream5" id="stream5_ol"> 
-                    <li v-for="verse in stream5.verses" :key="stream5.id"> 
-                        <p> {{ verse.text }} </p>
-                    </li>
-                </ol>
-                </details>
-            </fieldset>
-        </div>
+<div class="stream-actions">
+<button :disabled="!streams.stream5 || !(streams.stream5.verses &amp;&amp; streams.stream5.verses.length)" @click="copyStream('stream5')" type="button">Copy</button>
+<button :disabled="streamLoading.stream5" @click="retryStream('stream5')" type="button">Retry</button>
+<span class="mini" v-if="streamLoading.stream5"><span class="spinner"></span>Loading…</span>
+</div>
+<div class="alert" style="margin-top:10px;" v-if="streamError.stream5">{ streamError.stream5 }</div>
 
-
-
-
-
-
-    </div>
-    
-    
- <div id="search">
-        <div id='ot-reader'>
-            <h1>Old Testament* Bible Reader</h1>
+<details>
+<summary>{{ ranges.stream5 }}</summary>
+<ol id="stream5_ol" v-model="stream5">
+<li :key="verse.verse" v-for="verse in (streams.stream5.verses || [])">
+<p> {{ verse.text }} </p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+</div>
+<div id="search">
+<div id="ot-reader">
+<h1>Old Testament* Bible Reader</h1>
             *website I am pulling from only provides first verse for single chapter books for some strange reason
-            <br><br>
+            <br/><br/>
             this code is a bit buggy, you have to first select book name, then chapter, then hit the 'update scripture' button. if an extra chapter drop down shows up, you will have to likely refresh page, sorry!
     
             <p> Powered by <a href="https://bible-api.com/"> bible-api.com </a> and Vue</p>
-            <div id="ot-input">
+<div id="ot-input">
                 Choose book!
-            </div>  
-            <div id="app-ot">
-                
-                <fieldset>
-                    
-                    <button @click="loadOTVerses" id="ot-button">Update Scripture! (make sure chapter is selected also)</button> Click arrow to show/hide scripture
+            </div>
+<div id="app-ot">
+<fieldset>
+<button @click="loadOTVerses" id="ot-button">Update Scripture! (make sure chapter is selected also)</button> Click arrow to show/hide scripture
                     
                     <details id="ot">
-                        <summary v-if="otBibleVerses"> {{ otBibleVerses.reference }} </summary>
-                        
-                        <ol>
-                            <li v-for="verse in otBibleVerses.verses" :key="verse.id">
-                                <p>{{ verse.text }}</p>
-                            </li>
-                            
-                        </ol>
-                    </details>
-    
-                </fieldset>
-            </div>
-            <div id='nt-reader'>
-                <h1>New Testament* Bible Reader</h1>
+<summary v-if="otBibleVerses"> {{ otBibleVerses.reference }} </summary>
+<ol>
+<li :key="verse.id" v-for="verse in otBibleVerses.verses">
+<p>{{ verse.text }}</p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+<div id="nt-reader">
+<h1>New Testament* Bible Reader</h1>
                 *website I am pulling from only provides first verse for single chapter books for some strange reason
-                <br><br>
+                <br/><br/>
                 this code is a bit buggy, you have to first select book name, then chapter, then hit the 'update scripture' button. if an extra chapter drop down shows up, you will have to likely refresh page, sorry!
         
                 <p> Powered by <a href="https://bible-api.com/"> bible-api.com </a> and Vue</p>
-                <div id="nt-input">
+<div id="nt-input">
                     Choose book!
-                </div>  
-                <div id="app-nt">
-                    
-                    <fieldset>
-                        
-                        <button @click="loadNTVerses" id="nt-button">Update Scripture! (make sure chapter is selected also)</button> Click arrow to show/hide scripture
+                </div>
+<div id="app-nt">
+<fieldset>
+<button @click="loadNTVerses" id="nt-button">Update Scripture! (make sure chapter is selected also)</button> Click arrow to show/hide scripture
                         
                         <details id="nt">
-                            <summary v-if="ntBibleVerses"> {{ ntBibleVerses.reference }} </summary>
-                            
-                            <ol>
-                                <li v-for="verse in ntBibleVerses.verses" :key="verse.id">
-                                    <p>{{ verse.text }}</p>
-                                </li>
-                                
-                            </ol>
-                        </details>
-        
-                    </fieldset>
-                </div>
-            </div>
-    </div> -->
-    
-    <footer>
-        <p> Powered by: https://bible-api.com, Vue, Axios</p>
-        <p> Reading Schedule made by Elder Ron Kreins</p>
-        <p> Dedicated to the Greatest Wingman: Senior Airman Ryan Shackleford, or better known to the Air Force intelligence community as Shack, may he continue to rest in peace</p>
-        <p> Site Creator: Jonathon Cavada</p>
-        <p> Last Update: 01/09/2024 ~4pm PST </p>
-    </footer>    
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="script.js"></script>    
-    <script src="search.js"></script> 
-</body>
+<summary v-if="ntBibleVerses"> {{ ntBibleVerses.reference }} </summary>
+<ol>
+<li :key="verse.id" v-for="verse in ntBibleVerses.verses">
+<p>{{ verse.text }}</p>
+</li>
+</ol>
+</details>
+</fieldset>
+</div>
+</div>
+</div>
+<footer>
+<p> Powered by: https://bible-api.com, Vue, Axios</p>
+<p> Reading Schedule made by Elder Ron Kreins</p>
+<p> Dedicated to the Greatest Wingman: Senior Airman Ryan Shackleford, or better known to the Air Force intelligence community as Shack, may he continue to rest in peace</p>
+<p> Site Creator: Jonathon Cavada</p>
+<p> Last Update: 01/09/2024 ~4pm PST </p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="script.js"></script>
+<script src="search.js"></script>
+</div></body>
 </html>
